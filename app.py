@@ -2,7 +2,8 @@ import io
 import os
 import re
 import zipfile
-from flask import Flask, render_template, request, send_file, jsonify, flash, redirect, url_for
+from datetime import datetime, timezone
+from flask import Flask, render_template, request, send_file, jsonify, flash, redirect, url_for, Response
 from werkzeug.utils import secure_filename
 import img2pdf
 from PIL import Image
@@ -825,6 +826,50 @@ def terms():
 @app.route('/about', methods=['GET'])
 def about():
     return render_template('about.html')
+
+# --- SEO: Dynamic Sitemap & Robots.txt ---
+
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    base_url = "https://pdfkosh.onrender.com"
+    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    
+    pages = [
+        # Homepage
+        {"loc": "/", "priority": "1.0", "changefreq": "daily"},
+        # 9 Tools
+        {"loc": "/image-to-pdf", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": "/merge-pdf", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": "/split-pdf", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": "/compress-pdf", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": "/pdf-to-image", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": "/rotate-pdf", "priority": "0.8", "changefreq": "weekly"},
+        {"loc": "/protect-pdf", "priority": "0.8", "changefreq": "weekly"},
+        {"loc": "/unlock-pdf", "priority": "0.8", "changefreq": "weekly"},
+        {"loc": "/page-numbers", "priority": "0.8", "changefreq": "weekly"},
+        # Legal & Info Pages
+        {"loc": "/about", "priority": "0.6", "changefreq": "monthly"},
+        {"loc": "/privacy-policy", "priority": "0.5", "changefreq": "monthly"},
+        {"loc": "/terms", "priority": "0.5", "changefreq": "monthly"},
+    ]
+
+    xml_elements = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml_elements.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    for page in pages:
+        xml_elements.append("  <url>")
+        xml_elements.append(f"    <loc>{base_url}{page['loc']}</loc>")
+        xml_elements.append(f"    <lastmod>{today}</lastmod>")
+        xml_elements.append(f"    <changefreq>{page['changefreq']}</changefreq>")
+        xml_elements.append(f"    <priority>{page['priority']}</priority>")
+        xml_elements.append("  </url>")
+    xml_elements.append("</urlset>")
+
+    return Response("\n".join(xml_elements), mimetype='application/xml')
+
+@app.route('/robots.txt', methods=['GET'])
+def robots():
+    content = "User-agent: *\nAllow: /\n\nSitemap: https://pdfkosh.onrender.com/sitemap.xml\n"
+    return Response(content, mimetype='text/plain')
 
 @app.errorhandler(413)
 def request_entity_too_large(error):
