@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}PDFKosh | Your Free & Secure PDF Toolkit{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-14">
+
+  <!-- Hero Section -->
+  <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-semibold text-indigo-300 mb-4 shadow-inner">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      <span>9-in-1 Complete PDF Toolkit • 100% Free</span>
+    </div>
+    
+    <h1 class="text-3xl sm:text-5xl font-display font-extrabold tracking-tight text-white mb-3 leading-tight">
+      Every Tool You Need to <br class="hidden sm:inline">
+      Work With <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400">PDFs in One Place</span>
+    </h1>
+
+    <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+      Convert, merge, split, compress, protect, rotate, and number your PDF documents instantly. All operations run 100% in-memory with zero disk storage.
+    </p>
+  </div>
+
+  <!-- Tools Grid: Responsive 1 / 2 / 3 / 4 columns -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+
+    <!-- 1. Image to PDF -->
+    <a href="/image-to-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-indigo-300 transition-colors mb-1.5">
+          Image to PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Convert JPG, PNG, and WebP pictures into high-res PDF files with lossless fidelity.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-indigo-400 group-hover:text-indigo-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 2. Merge PDF -->
+    <a href="/merge-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-emerald-300 transition-colors mb-1.5">
+          Merge PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Combine multiple PDF files into one clean, unified PDF document in sequential order.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 3. Split PDF -->
+    <a href="/split-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-rose-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-rose-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-rose-300 transition-colors mb-1.5">
+          Split PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Extract custom page ranges (e.g. 1-3, 5) or split all pages into separate PDFs in a ZIP.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-rose-400 group-hover:text-rose-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 4. Compress PDF -->
+    <a href="/compress-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-amber-300 transition-colors mb-1.5">
+          Compress PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Shrink the file size of heavy PDFs while preserving crisp text, charts, and image quality.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-amber-400 group-hover:text-amber-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 5. PDF to Image -->
+    <a href="/pdf-to-image" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-sky-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-sky-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-sky-300 transition-colors mb-1.5">
+          PDF to Image
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Convert each page of your PDF file into individual high-resolution JPG or PNG pictures.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-sky-400 group-hover:text-sky-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 6. Rotate PDF (NEW) -->
+    <a href="/rotate-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-300 transition-colors mb-1.5">
+          Rotate PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Rotate your PDF pages 90°, 180°, or 270° clockwise with permanent orientation saving.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-cyan-400 group-hover:text-cyan-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 7. Protect PDF (NEW) -->
+    <a href="/protect-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-purple-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-purple-300 transition-colors mb-1.5">
+          Protect PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Encrypt your PDF with a secure password to prevent unauthorized viewing and tampering.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-purple-400 group-hover:text-purple-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 8. Unlock PDF (NEW) -->
+    <a href="/unlock-pdf" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-emerald-300 transition-colors mb-1.5">
+          Unlock PDF
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Remove password security from your PDF file so it can be viewed and printed unrestricted.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- 9. Page Numbers (NEW) -->
+    <a href="/page-numbers" class="group relative p-5 sm:p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col justify-between hover:-translate-y-1">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Active
+          </span>
+        </div>
+
+        <h3 class="font-display font-bold text-lg text-white group-hover:text-indigo-300 transition-colors mb-1.5">
+          Page Numbers
+        </h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          Add formatted page numbering (Bottom Center / Right) directly into your PDF document.
+        </p>
+      </div>
+
+      <div class="flex items-center text-xs font-semibold text-indigo-400 group-hover:text-indigo-300 gap-1.5">
+        <span>Use Tool</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Trust Features Row -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14 pt-10 border-t border-slate-800/80">
+    <div class="flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-indigo-400 flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white text-sm mb-1">Instant Results</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">No queues, no waiting. Operations finish in under 1 second.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white text-sm mb-1">Total Privacy</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">Documents processed in memory streams and discarded immediately.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-purple-400 flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white text-sm mb-1">100% Free Always</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">No signups, watermarks, or hidden limitations on your files.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

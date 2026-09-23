@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}PDFKosh | Your Free & Secure PDF Toolkit{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}PDFKosh - Free, fast, and 100% secure in-memory PDF tools. Merge, split, convert images to PDF, and more.{% endblock %}">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.04); }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 4s ease-in-out infinite;
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans relative selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+
+  <!-- Ambient background glow accents -->
+  <div class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/20 to-pink-600/10 blur-[140px] rounded-full pointer-events-none animate-pulse-subtle -z-10"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[300px] bg-blue-600/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
+
+  <!-- Unified Navigation Bar -->
+  <header class="w-full border-b border-slate-800/80 backdrop-blur-md bg-slate-950/70 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo & Name -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-indigo-300">
+            PDFKosh
+          </span>
+          <span class="block text-[10px] text-indigo-400 font-medium tracking-wide uppercase leading-none">
+            Secure PDF Toolkit
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden xl:flex items-center gap-1 text-xs sm:text-sm font-medium">
+        <a href="/" class="px-3 py-1.5 rounded-lg transition-colors {% if request.path == '/' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          All Tools
+        </a>
+        <a href="/image-to-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/image-to-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Image to PDF
+        </a>
+        <a href="/merge-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/merge-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Merge
+        </a>
+        <a href="/split-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/split-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Split
+        </a>
+        <a href="/compress-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/compress-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Compress
+        </a>
+        <a href="/pdf-to-image" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/pdf-to-image' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          PDF to Image
+        </a>
+        <a href="/rotate-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/rotate-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Rotate
+        </a>
+        <a href="/protect-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/protect-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Protect
+        </a>
+        <a href="/unlock-pdf" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/unlock-pdf' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Unlock
+        </a>
+        <a href="/page-numbers" class="px-2.5 py-1.5 rounded-lg transition-colors {% if request.path == '/page-numbers' %}bg-slate-800 text-white font-semibold{% else %}text-slate-400 hover:text-slate-200 hover:bg-slate-800/50{% endif %}">
+          Page Numbers
+        </a>
+      </nav>
+
+      <!-- Right status & mobile menu button -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>100% In-Memory</span>
+        </div>
+
+        <!-- Mobile Menu Dropdown Button -->
+        <button id="mobileMenuBtn" type="button" class="xl:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden xl:hidden border-t border-slate-800/80 bg-slate-950 px-4 py-3 space-y-1">
+      <a href="/" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">All Tools</a>
+      <a href="/image-to-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/image-to-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Image to PDF</a>
+      <a href="/merge-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/merge-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Merge PDF</a>
+      <a href="/split-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/split-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Split PDF</a>
+      <a href="/compress-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/compress-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Compress PDF</a>
+      <a href="/pdf-to-image" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/pdf-to-image' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">PDF to Image</a>
+      <a href="/rotate-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/rotate-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Rotate PDF</a>
+      <a href="/protect-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/protect-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Protect PDF</a>
+      <a href="/unlock-pdf" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/unlock-pdf' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Unlock PDF</a>
+      <a href="/page-numbers" class="block px-3 py-2 rounded-lg text-sm {% if request.path == '/page-numbers' %}bg-indigo-600/20 text-indigo-300 font-semibold{% else %}text-slate-300 hover:bg-slate-900{% endif %}">Page Numbers</a>
+    </div>
+  </header>
+
+  <!-- Server Flashed Messages -->
+  <div class="max-w-4xl w-full mx-auto px-4 sm:px-6 pt-6">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="space-y-2 mb-4">
+          {% for category, message in messages %}
+            <div class="p-4 rounded-xl text-sm font-medium flex items-center gap-3 {% if category == 'error' %}bg-rose-500/10 border border-rose-500/20 text-rose-300{% else %}bg-emerald-500/10 border border-emerald-500/20 text-emerald-300{% endif %}">
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{{ message }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Page Content -->
+  <main class="flex-1 flex flex-col">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="border-t border-slate-800/80 bg-slate-950/80 py-8 mt-16 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-display font-bold text-sm text-slate-300">PDFKosh</span>
+        <span class="text-slate-600">•</span>
+        <span>Your Free & Secure PDF Toolkit</span>
+      </div>
+      <div>
+        100% In-Memory Processing — No uploaded documents are ever stored on our servers.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

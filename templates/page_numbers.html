@@ -1,0 +1,481 @@
+{% extends "base.html" %}
+
+{% block title %}Add Page Numbers to PDF Online | PDFKosh{% endblock %}
+{% block meta_description %}Insert page numbers into your PDF documents with custom position and format for free with PDFKosh.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col justify-center">
+
+  <!-- Breadcrumb / Back Link -->
+  <div class="mb-6">
+    <a href="/" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      <span>Back to All Tools</span>
+    </a>
+  </div>
+
+  <!-- Client-side Error Banner -->
+  <div id="clientErrorBanner" class="hidden mb-6 p-4 rounded-2xl text-sm font-medium bg-rose-500/10 border border-rose-500/20 text-rose-300 flex items-center gap-3">
+    <svg class="w-5 h-5 flex-shrink-0 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span id="clientErrorMessage" class="flex-1">An error occurred.</span>
+    <button type="button" onclick="hideError()" class="text-rose-400 hover:text-rose-200">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Title Section -->
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-slate-300 mb-3 shadow-inner">
+      <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+      </svg>
+      Vector Page Number Stamping
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-display font-extrabold tracking-tight text-white mb-2">
+      Add <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-violet-400 to-sky-400">Page Numbers</span>
+    </h1>
+    <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto">
+      Insert crisp page numbers into your PDF document with customizable placement and format.
+    </p>
+  </div>
+
+  <!-- Main Card -->
+  <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative">
+
+    <form id="pageNumbersForm" action="/page-numbers" method="POST" enctype="multipart/form-data">
+      
+      <input 
+        type="file" 
+        id="pdfFileInput" 
+        name="pdf_file" 
+        accept=".pdf,application/pdf" 
+        class="hidden" 
+        required
+      />
+
+      <!-- Drop Zone -->
+      <div id="dropZone" class="group border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-8 sm:p-12 text-center cursor-pointer transition-all duration-200 bg-slate-950/40 hover:bg-slate-950/70 relative">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-md">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+          </svg>
+        </div>
+
+        <h3 class="text-base sm:text-lg font-semibold text-slate-200 mb-1">
+          Select a PDF file or drag & drop here
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 mb-4">
+          Choose a PDF document to add sequential page numbers
+        </p>
+
+        <button 
+          type="button" 
+          onclick="document.getElementById('pdfFileInput').click()" 
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-sm font-medium text-slate-200 hover:text-white transition-all duration-150 shadow-sm"
+        >
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Select PDF
+        </button>
+      </div>
+
+      <!-- Config Section (Hidden until file selected) -->
+      <div id="numberingConfigSection" class="hidden mt-6 space-y-6">
+
+        <!-- Selected PDF File Card -->
+        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs flex-shrink-0">
+              PDF
+            </div>
+            <div class="min-w-0">
+              <p id="selectedFileName" class="text-sm font-semibold text-slate-200 truncate max-w-[200px] sm:max-w-md">
+                document.pdf
+              </p>
+              <div class="text-xs text-slate-400 flex items-center gap-2">
+                <span id="selectedFileSize">0 KB</span>
+                <span>•</span>
+                <span id="pageCountDisplay" class="text-indigo-400 font-medium">Detecting pages...</span>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            type="button" 
+            onclick="resetFileSelection()" 
+            class="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl transition-all"
+            title="Change PDF"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Position & Format Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <!-- Position Selection -->
+          <div class="space-y-3">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+              Number Position
+            </label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="p-3.5 rounded-xl bg-slate-950/40 border border-slate-800 cursor-pointer hover:border-slate-700 transition-all flex items-center justify-between has-[:checked]:border-indigo-500/70 has-[:checked]:bg-indigo-500/10">
+                <div>
+                  <span class="block text-xs font-bold text-white">Bottom Center</span>
+                  <span class="block text-[11px] text-slate-400">Standard</span>
+                </div>
+                <input type="radio" name="position" value="bottom-center" checked class="text-indigo-500 focus:ring-indigo-500 focus:ring-offset-slate-900">
+              </label>
+
+              <label class="p-3.5 rounded-xl bg-slate-950/40 border border-slate-800 cursor-pointer hover:border-slate-700 transition-all flex items-center justify-between has-[:checked]:border-indigo-500/70 has-[:checked]:bg-indigo-500/10">
+                <div>
+                  <span class="block text-xs font-bold text-white">Bottom Right</span>
+                  <span class="block text-[11px] text-slate-400">Margin</span>
+                </div>
+                <input type="radio" name="position" value="bottom-right" class="text-indigo-500 focus:ring-indigo-500 focus:ring-offset-slate-900">
+              </label>
+            </div>
+          </div>
+
+          <!-- Format Selection -->
+          <div class="space-y-3">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+              Number Format
+            </label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="p-3.5 rounded-xl bg-slate-950/40 border border-slate-800 cursor-pointer hover:border-slate-700 transition-all flex items-center justify-between has-[:checked]:border-indigo-500/70 has-[:checked]:bg-indigo-500/10">
+                <div>
+                  <span class="block text-xs font-bold text-white">Page X of Y</span>
+                  <span class="block text-[11px] text-slate-400">Page 1 of 10</span>
+                </div>
+                <input type="radio" name="format" value="page_x_of_y" checked class="text-indigo-500 focus:ring-indigo-500 focus:ring-offset-slate-900">
+              </label>
+
+              <label class="p-3.5 rounded-xl bg-slate-950/40 border border-slate-800 cursor-pointer hover:border-slate-700 transition-all flex items-center justify-between has-[:checked]:border-indigo-500/70 has-[:checked]:bg-indigo-500/10">
+                <div>
+                  <span class="block text-xs font-bold text-white">Number Only</span>
+                  <span class="block text-[11px] text-slate-400">1, 2, 3...</span>
+                </div>
+                <input type="radio" name="format" value="simple" class="text-indigo-500 focus:ring-indigo-500 focus:ring-offset-slate-900">
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Starting Number -->
+        <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800 flex items-center justify-between">
+          <div>
+            <label for="startNumberInput" class="block text-xs font-bold text-white">First Number</label>
+            <span class="text-[11px] text-slate-400">Start counting pages from</span>
+          </div>
+          <input 
+            type="number" 
+            id="startNumberInput" 
+            name="start_number" 
+            value="1" 
+            min="1" 
+            class="w-20 px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-sm text-center focus:outline-none focus:border-indigo-500 font-mono"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-2">
+          <button 
+            type="submit" 
+            id="numberBtn" 
+            class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-600 hover:from-indigo-500 hover:to-sky-500 text-white font-semibold text-base shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all duration-150 flex items-center justify-center gap-3 cursor-pointer"
+          >
+            <svg id="numberIcon" class="w-5 h-5 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+            </svg>
+            <span id="numberBtnText">Add Page Numbers</span>
+
+            <svg id="loadingSpinner" class="hidden animate-spin w-5 h-5 text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+    <!-- Success & Download Card -->
+    <div id="downloadCard" class="hidden text-center py-6">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/10">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h2 class="text-xl font-display font-bold text-white mb-1">
+        Page Numbers Added!
+      </h2>
+      <p class="text-sm text-slate-400 mb-6">
+        Your numbered PDF document is ready for download.
+      </p>
+
+      <div class="max-w-md mx-auto mb-6 p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center gap-3 text-left">
+        <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center flex-shrink-0 font-bold text-xs">
+          PDF
+        </div>
+        <div class="flex-1 min-w-0">
+          <div id="downloadResultName" class="text-sm font-semibold text-slate-200 truncate">
+            numbered.pdf
+          </div>
+          <div id="downloadResultSize" class="text-xs text-slate-400">
+            Numbered Document
+          </div>
+        </div>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+          Ready
+        </span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a 
+          id="downloadLink" 
+          href="#" 
+          download="numbered.pdf"
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition-all"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download Numbered PDF
+        </a>
+
+        <button 
+          type="button" 
+          onclick="resetNumberer()" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-medium text-sm border border-slate-700 transition-all flex items-center justify-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Number Another PDF
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  const pdfFileInput = document.getElementById('pdfFileInput');
+  const dropZone = document.getElementById('dropZone');
+  const numberingConfigSection = document.getElementById('numberingConfigSection');
+  const selectedFileName = document.getElementById('selectedFileName');
+  const selectedFileSize = document.getElementById('selectedFileSize');
+  const pageCountDisplay = document.getElementById('pageCountDisplay');
+  const pageNumbersForm = document.getElementById('pageNumbersForm');
+  const numberBtn = document.getElementById('numberBtn');
+  const numberBtnText = document.getElementById('numberBtnText');
+  const numberIcon = document.getElementById('numberIcon');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const downloadCard = document.getElementById('downloadCard');
+  const downloadLink = document.getElementById('downloadLink');
+  const downloadResultName = document.getElementById('downloadResultName');
+  const downloadResultSize = document.getElementById('downloadResultSize');
+  const clientErrorBanner = document.getElementById('clientErrorBanner');
+  const clientErrorMessage = document.getElementById('clientErrorMessage');
+
+  let currentBlobUrl = null;
+
+  function formatBytes(bytes, decimals = 1) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  function showError(msg) {
+    clientErrorMessage.textContent = msg;
+    clientErrorBanner.classList.remove('hidden');
+  }
+
+  function hideError() {
+    clientErrorBanner.classList.add('hidden');
+  }
+
+  async function handleFile(file) {
+    hideError();
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+      showError('Please upload a valid PDF document.');
+      resetFileSelection();
+      return;
+    }
+
+    if (file.size > 50 * 1024 * 1024) {
+      showError('File exceeds 50 MB limit.');
+      resetFileSelection();
+      return;
+    }
+
+    selectedFileName.textContent = file.name;
+    selectedFileSize.textContent = formatBytes(file.size);
+    pageCountDisplay.textContent = 'Reading pages...';
+
+    dropZone.classList.add('hidden');
+    numberingConfigSection.classList.remove('hidden');
+
+    const formData = new FormData();
+    formData.append('pdf_file', file);
+
+    try {
+      const resp = await fetch('/api/pdf-info', {
+        method: 'POST',
+        body: formData
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        const pages = data.total_pages || 1;
+        pageCountDisplay.textContent = `${pages} page${pages === 1 ? '' : 's'}`;
+      } else {
+        pageCountDisplay.textContent = 'PDF document ready';
+      }
+    } catch (_) {
+      pageCountDisplay.textContent = 'PDF document ready';
+    }
+  }
+
+  function resetFileSelection() {
+    pdfFileInput.value = '';
+    dropZone.classList.remove('hidden');
+    numberingConfigSection.classList.add('hidden');
+    hideError();
+  }
+
+  function resetNumberer() {
+    if (currentBlobUrl) {
+      URL.revokeObjectURL(currentBlobUrl);
+      currentBlobUrl = null;
+    }
+    resetFileSelection();
+    downloadCard.classList.add('hidden');
+    pageNumbersForm.classList.remove('hidden');
+  }
+
+  pdfFileInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  });
+
+  // Drag and drop
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.add('border-indigo-500', 'bg-slate-950/80', 'scale-[1.01]');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.remove('border-indigo-500', 'bg-slate-950/80', 'scale-[1.01]');
+    });
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    if (dt.files && dt.files[0]) {
+      pdfFileInput.files = dt.files;
+      handleFile(dt.files[0]);
+    }
+  });
+
+  // Submit Handler
+  pageNumbersForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideError();
+
+    if (!pdfFileInput.files || !pdfFileInput.files[0]) {
+      showError('Please select a PDF file.');
+      return;
+    }
+
+    numberBtn.disabled = true;
+    numberBtn.classList.add('opacity-80', 'cursor-not-allowed');
+    numberBtnText.textContent = 'Stamping Page Numbers...';
+    numberIcon.classList.add('hidden');
+    loadingSpinner.classList.remove('hidden');
+
+    const formData = new FormData(pageNumbersForm);
+
+    try {
+      const response = await fetch('/page-numbers', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
+
+      if (!response.ok) {
+        let errText = 'Failed to add page numbers.';
+        try {
+          const errJson = await response.json();
+          errText = errJson.error || errText;
+        } catch (_) {
+          errText = `Server error (${response.status})`;
+        }
+        throw new Error(errText);
+      }
+
+      const blob = await response.blob();
+      let suggestedName = response.headers.get('X-Suggested-Filename') || 'numbered.pdf';
+
+      if (currentBlobUrl) {
+        URL.revokeObjectURL(currentBlobUrl);
+      }
+      currentBlobUrl = URL.createObjectURL(blob);
+
+      downloadLink.href = currentBlobUrl;
+      downloadLink.download = suggestedName;
+      downloadResultName.textContent = suggestedName;
+      downloadResultSize.textContent = `Numbered PDF • ${formatBytes(blob.size)}`;
+
+      // Auto download
+      const autoDownload = document.createElement('a');
+      autoDownload.href = currentBlobUrl;
+      autoDownload.download = suggestedName;
+      document.body.appendChild(autoDownload);
+      autoDownload.click();
+      document.body.removeChild(autoDownload);
+
+      pageNumbersForm.classList.add('hidden');
+      downloadCard.classList.remove('hidden');
+
+    } catch (err) {
+      showError(err.message || 'Error occurred while stamping page numbers.');
+    } finally {
+      numberBtn.disabled = false;
+      numberBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+      numberBtnText.textContent = 'Add Page Numbers';
+      numberIcon.classList.remove('hidden');
+      loadingSpinner.classList.add('hidden');
+    }
+  });
+</script>
+{% endblock %}
