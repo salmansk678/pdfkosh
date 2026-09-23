@@ -139,7 +139,7 @@ def convert_image():
 
         file_bytes = io.BytesIO(file.read())
         processed_bytes = prepare_image_for_pdf(file_bytes)
-        pdf_bytes = img2pdf.convert(processed_bytes)
+        pdf_bytes = img2pdf.convert(processed_bytes, rotation=img2pdf.Rotation.ifvalid)
 
         response = send_file(
             io.BytesIO(pdf_bytes),
