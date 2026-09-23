@@ -3,7 +3,7 @@ import os
 import re
 import zipfile
 from datetime import datetime, timezone
-from flask import Flask, render_template, request, send_file, jsonify, flash, redirect, url_for, Response
+from flask import Flask, render_template, request, send_file, send_from_directory, jsonify, flash, redirect, url_for, Response
 from werkzeug.utils import secure_filename
 import img2pdf
 from PIL import Image
@@ -890,6 +890,14 @@ def sitemap():
 def robots():
     content = "User-agent: *\nAllow: /\n\nSitemap: https://pdfkosh.onrender.com/sitemap.xml\n"
     return Response(content, mimetype='text/plain')
+
+@app.route('/favicon.ico', methods=['GET'])
+def favicon():
+    return send_from_directory(
+        os.path.join(app.root_path, 'static'),
+        'favicon.ico',
+        mimetype='image/vnd.microsoft.icon'
+    )
 
 @app.errorhandler(413)
 def request_entity_too_large(error):
