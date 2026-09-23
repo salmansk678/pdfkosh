@@ -283,15 +283,31 @@
       <h3 class="font-display font-bold text-lg text-white mb-1">
         Support PDFKosh
       </h3>
-      <p class="text-xs text-slate-400 mb-5 leading-relaxed">
-        PDFKosh is 100% free and open. Your contributions help keep our fast in-memory servers running without mandatory subscriptions.
+      <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+        PDFKosh is 100% free and open. Scan the QR code or copy the UPI ID below to contribute.
       </p>
 
-      <!-- UPI ID Display Box -->
-      <div class="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 mb-4 text-left">
+      <!-- Dynamic UPI QR Code Card -->
+      <div class="p-3 bg-white rounded-2xl inline-block mx-auto mb-4 shadow-lg border border-slate-700">
+        <img 
+          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3Dfaizan014%40slc%26pn%3DPDFKosh%26cu%3DINR" 
+          alt="Scan UPI QR Code to donate to PDFKosh" 
+          width="180" 
+          height="180" 
+          class="w-40 h-40 object-contain mx-auto rounded-lg"
+          loading="lazy"
+        />
+        <div class="text-[10px] text-slate-700 font-semibold mt-1.5 flex items-center justify-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Scan with Any UPI App
+        </div>
+      </div>
+
+      <!-- UPI ID Display Box with 1-Click Copy -->
+      <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 mb-3 text-left">
         <div class="text-[10px] uppercase font-bold tracking-wider text-slate-500 mb-1">UPI ID for Donations</div>
         <div class="flex items-center justify-between gap-2">
-          <span id="upiIdText" class="font-mono text-xs text-indigo-300 font-semibold truncate select-all">salmansk678@upi</span>
+          <span id="upiIdText" class="font-mono text-xs text-indigo-300 font-semibold truncate select-all">faizan014@slc</span>
           <button 
             type="button" 
             onclick="copyUpiId()" 
@@ -302,6 +318,17 @@
           </button>
         </div>
       </div>
+
+      <!-- Mobile Pay Direct UPI App link -->
+      <a 
+        href="upi://pay?pa=faizan014@slc&pn=PDFKosh&cu=INR" 
+        class="sm:hidden mb-3 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition-all"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        <span>Open in UPI App</span>
+      </a>
 
       <p class="text-[11px] text-slate-500 mb-4">
         Supports GPay, PhonePe, Paytm, BHIM, or any banking app.
@@ -338,16 +365,43 @@
     }
 
     function copyUpiId() {
-      const upiText = document.getElementById('upiIdText').textContent;
-      navigator.clipboard.writeText(upiText).then(() => {
-        const btn = document.getElementById('copyUpiBtn');
-        btn.textContent = 'Copied!';
-        btn.classList.add('text-emerald-300', 'bg-emerald-500/20', 'border-emerald-500/30');
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.classList.remove('text-emerald-300', 'bg-emerald-500/20', 'border-emerald-500/30');
-        }, 2000);
-      });
+      const upiText = (document.getElementById('upiIdText') ? document.getElementById('upiIdText').textContent : 'faizan014@slc').trim();
+      const btn = document.getElementById('copyUpiBtn');
+      const showSuccess = () => {
+        if (btn) {
+          btn.textContent = 'Copied!';
+          btn.classList.add('text-emerald-300', 'bg-emerald-500/20', 'border-emerald-500/30');
+          setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.classList.remove('text-emerald-300', 'bg-emerald-500/20', 'border-emerald-500/30');
+          }, 2000);
+        }
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(upiText).then(showSuccess).catch(() => {
+          fallbackCopyText(upiText, showSuccess);
+        });
+      } else {
+        fallbackCopyText(upiText, showSuccess);
+      }
+    }
+
+    function fallbackCopyText(text, callback) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        callback();
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(textarea);
     }
   </script>
   {% block extra_scripts %}{% endblock %}
