@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy | PDFKosh - 100% In-Memory PDF Processing{% endblock %}
+{% block meta_description %}PDFKosh Privacy Policy: Learn how our zero-storage, in-memory PDF tools ensure complete security and privacy for your files.{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16">
+
+  <!-- Breadcrumb -->
+  <div class="mb-6">
+    <a href="/" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      <span>Back to Home</span>
+    </a>
+  </div>
+
+  <!-- Header -->
+  <div class="mb-10 pb-8 border-b border-slate-800">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 mb-3">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+      Zero Storage • In-Memory Architecture
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight mb-3">
+      Privacy Policy
+    </h1>
+    <p class="text-sm text-slate-400">
+      Last updated: September 23, 2026 • Effective immediately
+    </p>
+  </div>
+
+  <!-- Content Sections -->
+  <div class="space-y-8 text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
+
+    <!-- 1. The Core Guarantee -->
+    <div class="p-6 rounded-3xl bg-slate-900/80 border border-indigo-500/20 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+        1. The Core Guarantee: 100% In-Memory Processing
+      </h2>
+      <p class="mb-3 text-slate-300">
+        At <strong class="text-white">PDFKosh</strong>, your privacy is our foundational architecture, not an afterthought. When you upload any document (PDF, JPG, PNG, etc.):
+      </p>
+      <ul class="space-y-2 list-disc list-inside text-slate-400 text-sm">
+        <li><strong class="text-slate-200">Zero Disk Storage:</strong> Your files are held strictly in temporary RAM memory streams (<code class="text-indigo-300 bg-slate-950 px-1.5 py-0.5 rounded">io.BytesIO</code>) during the active processing operation.</li>
+        <li><strong class="text-slate-200">No Permanent Copies:</strong> Nothing is ever written to our server's hard disk drives, databases, or cloud buckets.</li>
+        <li><strong class="text-slate-200">Instant Destruction:</strong> As soon as your download begins or the HTTP request finishes, memory is cleared and all references are discarded immediately.</li>
+        <li><strong class="text-slate-200">Zero Content Scanning:</strong> We do not inspect, read, OCR, train artificial intelligence models on, or share your document contents with any third party.</li>
+      </ul>
+    </div>
+
+    <!-- 2. Information We Do Not Collect -->
+    <div class="p-6 rounded-3xl bg-slate-900/50 border border-slate-800">
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        2. Information We Do NOT Collect
+      </h2>
+      <p class="text-slate-400 mb-2">
+        Because PDFKosh operates without user accounts or registrations:
+      </p>
+      <ul class="space-y-1.5 list-disc list-inside text-slate-400 text-sm">
+        <li>We do not collect names, email addresses, phone numbers, or passwords.</li>
+        <li>We do not store the documents or images you upload.</li>
+        <li>We do not store passwords entered in the Protect or Unlock PDF tools.</li>
+      </ul>
+    </div>
+
+    <!-- 3. Technical Log Data -->
+    <div class="p-6 rounded-3xl bg-slate-900/50 border border-slate-800">
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+        3. Technical Log Data
+      </h2>
+      <p class="text-slate-400 text-sm leading-relaxed mb-3">
+        Like standard web services, our hosting infrastructure may temporarily record generic web server logs, which include your IP address, browser user-agent, operating system, and the timestamp of requests. These logs are used purely for security diagnostics, DDoS mitigation, and server performance monitoring, and are never linked to personal identities.
+      </p>
+    </div>
+
+    <!-- 4. Google AdSense & Cookies Policy -->
+    <div class="p-6 rounded-3xl bg-slate-900/50 border border-slate-800">
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+        4. Cookies, Web Beacons & Third-Party Advertising
+      </h2>
+      <p class="text-slate-400 text-sm leading-relaxed mb-3">
+        To keep PDFKosh 100% free for everyone around the world, we may serve advertisements provided by third-party advertising partners, including <strong class="text-white">Google AdSense</strong>.
+      </p>
+      <ul class="space-y-2 list-disc list-inside text-slate-400 text-sm mb-3">
+        <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites on the internet.</li>
+        <li>Google's use of advertising cookies enables it and its partners to serve personalized or contextual ads to you based on your visits to our site and/or other sites on the Internet.</li>
+        <li>Users may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 underline">Google Ads Settings</a> or through <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 underline">aboutads.info</a>.</li>
+      </ul>
+      <p class="text-slate-400 text-xs italic">
+        Note: Advertising cookies never have access to your uploaded PDF files or documents.
+      </p>
+    </div>
+
+    <!-- 5. GDPR & CCPA Compliance -->
+    <div class="p-6 rounded-3xl bg-slate-900/50 border border-slate-800">
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+        5. GDPR & CCPA Privacy Rights
+      </h2>
+      <p class="text-slate-400 text-sm leading-relaxed mb-3">
+        Under European GDPR and California CCPA privacy frameworks, users have rights regarding their data. Because PDFKosh does not retain personal information or files, there is no personal data stored on our servers to modify, delete, or sell. We do not sell your personal data.
+      </p>
+    </div>
+
+    <!-- 6. Children's Information -->
+    <div class="p-6 rounded-3xl bg-slate-900/50 border border-slate-800">
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+        6. Children's Information
+      </h2>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        PDFKosh does not knowingly collect any personally identifiable information from children under the age of 13. If you believe your child provided personal information on our website, please contact us immediately, and we will promptly delete it.
+      </p>
+    </div>
+
+    <!-- 7. Contact Us -->
+    <div class="p-6 rounded-3xl bg-slate-900/50 border border-slate-800">
+      <h2 class="text-lg sm:text-xl font-display font-bold text-white mb-3 flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+        7. Contact Us
+      </h2>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        If you have any questions, suggestions, or concerns regarding our Privacy Policy, please reach out through our official GitHub repository at <a href="https://github.com/salmansk678/pdfkosh" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 underline font-medium">github.com/salmansk678/pdfkosh</a>.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

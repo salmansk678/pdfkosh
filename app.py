@@ -812,6 +812,20 @@ def page_numbers():
         flash(error_msg, "error")
         return redirect(url_for('page_numbers_page'))
 
+# --- Legal & Company Pages ---
+
+@app.route('/privacy-policy', methods=['GET'])
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html')
+
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
 @app.errorhandler(413)
 def request_entity_too_large(error):
     error_msg = "Uploaded file exceeds the maximum allowed size (50 MB)."
