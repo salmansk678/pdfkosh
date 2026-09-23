@@ -367,38 +367,58 @@ def compress_pdf():
         compressed_bytes = None
 
         if compression_level == 'strong':
-            doc = pdfium.PdfDocument(io.BytesIO(raw_bytes))
-            image_list = []
-            for page in doc:
-                pil_img = page.render(scale=1.4).to_pil()
-                img_buf = io.BytesIO()
-                pil_img.save(img_buf, format="JPEG", quality=72, optimize=True)
-                image_list.append(img_buf.getvalue())
-            compressed_bytes = img2pdf.convert(image_list)
+            # Aggressive compression (quality 60-65, 96-120 DPI)
+            dpi = 100
+            quality = 65
         else:
-            reader = pypdf.PdfReader(io.BytesIO(raw_bytes))
-            writer = pypdf.PdfWriter()
-            for p in reader.pages:
-                new_page = writer.add_page(p)
-                try:
-                    new_page.compress_content_streams()
-                except Exception:
-                    pass
-            try:
-                writer.compress_identical_objects(remove_duplicates=True, remove_unreferenced=True)
-            except Exception:
-                pass
+            # Recommended: moderate/balanced image compression (quality 80-85, 150 DPI)
+            dpi = 150
+            quality = 82
 
-            out = io.BytesIO()
-            writer.write(out)
-            writer.close()
-            compressed_bytes = out.getvalue()
+        doc = pdfium.PdfDocument(io.BytesIO(raw_bytes))
+        image_list = []
+        scale = dpi / 72.0
+        for page in doc:
+            pil_img = page.render(scale=scale).to_pil()
+            if pil_img.mode != "RGB":
+                pil_img = pil_img.convert("RGB")
+            img_buf = io.BytesIO()
+            pil_img.save(img_buf, format="JPEG", quality=quality, dpi=(dpi, dpi), optimize=True)
+            image_list.append(img_buf.getvalue())
+        compressed_bytes = img2pdf.convert(image_list, rotation=img2pdf.Rotation.ifvalid)
 
         compressed_size = len(compressed_bytes)
 
         if compressed_size > original_size and compression_level != 'strong':
-            compressed_bytes = raw_bytes
-            compressed_size = original_size
+            # If raster compression produces a larger file (e.g. lightweight vector PDF),
+            # fallback to lossless stream compression and deduplication
+            try:
+                reader = pypdf.PdfReader(io.BytesIO(raw_bytes))
+                writer = pypdf.PdfWriter()
+                for p in reader.pages:
+                    new_page = writer.add_page(p)
+                    try:
+                        new_page.compress_content_streams()
+                    except Exception:
+                        pass
+                try:
+                    writer.compress_identical_objects(remove_duplicates=True, remove_unreferenced=True)
+                except Exception:
+                    pass
+
+                out = io.BytesIO()
+                writer.write(out)
+                writer.close()
+                lossless_bytes = out.getvalue()
+                if len(lossless_bytes) < original_size:
+                    compressed_bytes = lossless_bytes
+                    compressed_size = len(lossless_bytes)
+                else:
+                    compressed_bytes = raw_bytes
+                    compressed_size = original_size
+            except Exception:
+                compressed_bytes = raw_bytes
+                compressed_size = original_size
 
         saved_bytes = max(0, original_size - compressed_size)
         saved_percent = round((saved_bytes / original_size) * 100, 1) if original_size > 0 else 0
